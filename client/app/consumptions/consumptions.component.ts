@@ -12,7 +12,6 @@ import * as d3 from 'd3';
   styleUrls: ['./consumptions.component.css']
 })
 export class ConsumptionsComponent implements OnInit {
-
   consumption = new Consumption();
   consumptions: Consumption[] = [];
   isLoading = true;
@@ -25,9 +24,47 @@ export class ConsumptionsComponent implements OnInit {
   source = new FormControl('', Validators.required);
   remark = new FormControl('');
   date = new FormControl('', Validators.required);
+  options: Object;
   constructor(private consumptionService: ConsumptionService,
     private formBuilder: FormBuilder,
-    public toast: ToastComponent) { }
+    public toast: ToastComponent) {
+
+    this.options = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: 'Browser market shares at a specific website, 2014'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          }
+        }
+      },
+      series: [{
+        name: 'Brands',
+        data: [
+          { name: 'Microsoft Internet Explorer', y: 56.33 },
+          { name: 'Chrome', y: 24.03 },
+          { name: 'Firefox', y: 10.38 },
+          { name: 'Safari', y: 4.77 },
+          { name: 'Opera', y: 0.91 },
+          { name: 'Proprietary or Undetectable', y: 0.2 }
+        ]
+      }]
+    }
+  }
 
   ngOnInit() {
     this.getConsumptions();
