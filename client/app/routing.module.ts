@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CatsComponent } from './cats/cats.component';
 import { ConsumptionsComponent } from './consumptions/consumptions.component';
+import { CardComponent } from './card/card.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: '', component: AboutComponent },
   { path: 'cats', component: CatsComponent },
   { path: 'consumptions', component: ConsumptionsComponent },
+  { path: 'cards', component: CardComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },

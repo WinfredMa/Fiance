@@ -1,0 +1,104 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card mb-3" *ngIf="!isLoading">
+  <h4 class="card-header">Current cards ({{cards.length}})</h4>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Bank</th>
+          <th scope="col">Type</th>
+          <th scope="col">Limit</th>
+          <th scope="col">Statement Date</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Remark</th>
+          <th scope="col">Create Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="cards.length === 0">
+        <tr>
+          <td colspan="8">There are no card in the DB. Add a new card below.</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!isEditing">
+        <tr *ngFor="let card of cards">
+          <td>{{card.bank}}</td>
+          <td>{{card.type}}</td>
+          <td>{{card.limit}}</td>
+          <td>{{card.statementdate}}</td>
+          <td>{{card.duedate}}</td>
+          <td>{{card.remark}}</td>
+          <td>{{card.createdate}}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="enableEditing(card)">
+              <i class="fa fa-pencil"></i> Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteCard(card)">
+              <i class="fa fa-trash"></i> Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="isEditing">
+        <tr>
+          <td colspan="8">
+            <form class="form-inline" #form="ngForm" (ngSubmit)="editCard(card)">
+              <input class="form-control mr-2" type="text" name="bank" [(ngModel)]="card.bank" placeholder="Bank" required>
+              <input class="form-control mr-2" type="text" name="type" [(ngModel)]="card.type" placeholder="Type" required>
+              <input class="form-control mr-2" type="number" name="limit" [(ngModel)]="card.limit" placeholder="Limit" min="0" required>
+              <input class="form-control mr-2" type="text" name="statementdate" [(ngModel)]="card.category" placeholder="Statement Date" required>
+              <input class="form-control mr-2" type="text" name="duedate" [(ngModel)]="card.duedate" placeholder="Due Date" required>
+              <input class="form-control mr-2" type="text" name="remark" [(ngModel)]="card.remark" placeholder="Remark">
+              <input class="form-control mr-2" name="date" [(ngModel)]="card.createdate" placeholder="Create Date" ngui-datetime-picker />
+              <button class="btn btn-sm btn-primary mr-2" type="submit" [disabled]="!form.form.valid">
+                <i class="fa fa-floppy-o"></i> Save</button>
+              <button class="btn btn-sm btn-warning" (click)="cancelEditing()">
+                <i class="fa fa-times"></i> Cancel</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<chart [options]="options"></chart>
+<div class="card" *ngIf="!isEditing">
+  <h4 class="card-header">Add new card</h4>
+  <div class="card-body">
+    <form [formGroup]="addCardForm" (ngSubmit)="addCard()">
+      <div>
+        <label>Name</label>
+        <input class="form-control mr-2" type="text" name="bank" formControlName="bank" placeholder="Name">
+      </div>
+      <div>
+        <label>Type</label>
+        <input class="form-control mr-2" type="text" name="type" formControlName="type" placeholder="Type">
+      </div>
+      <div>
+        <label>Limit</label>
+        <input class="form-control mr-2" type="number" name="limit" formControlName="limit" placeholder="Limit" min="0">
+      </div>
+      <div>
+        <label>Statement Date</label>
+        <input class="form-control mr-2" type="text" name="statementdate" formControlName="statementdate" placeholder="Statement Date">
+      </div>
+      <div>
+        <label>Due Date</label>
+        <input class="form-control mr-2" type="text" name="duedate" formControlName="duedate" placeholder="Due Date">
+      </div>
+      <div>
+        <label>Remark</label>
+        <input class="form-control mr-2" type="text" name="remark" formControlName="remark" placeholder="Remark">
+      </div>
+      <div>
+        <label>Create Date</label>
+        <input class="form-control mr-2" name="createdate" formControlName="createdate" placeholder="Create Date" ngui-datetime-picker />
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit" [disabled]="!addCardForm.valid">
+          <i class="fa fa-floppy-o"></i> Add</button>
+      </div>
+    </form>
+  </div>
+</div>

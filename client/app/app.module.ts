@@ -5,6 +5,7 @@ import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
 import { ConsumptionService } from './services/consumption.service';
+import { CardService } from './services/card.service'
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
@@ -12,7 +13,8 @@ import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 // Components
 import { AppComponent } from './app.component';
 import { CatsComponent } from './cats/cats.component';
-import { ConsumptionsComponent } from './consumptions/consumptions.component'
+import { ConsumptionsComponent } from './consumptions/consumptions.component';
+import { CardComponent } from './card/card.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -32,6 +34,7 @@ export function tokenGetter() {
     AppComponent,
     CatsComponent,
     ConsumptionsComponent,
+    CardComponent,
     AboutComponent,
     RegisterComponent,
     LoginComponent,
@@ -58,6 +61,7 @@ export function tokenGetter() {
     AuthGuardAdmin,
     CatService,
     ConsumptionService,
+    CardService,
     UserService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
