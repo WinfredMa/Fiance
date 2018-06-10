@@ -18,7 +18,6 @@ export class ConsumptionService {
   }
 
   addConsumption(consumption: Consumption): Observable<Consumption> {
-    console.log(consumption)
     return this.http.post<Consumption>('/api/consumption', consumption);
   }
 
