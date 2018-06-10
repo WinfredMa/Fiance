@@ -22,12 +22,11 @@ export class CardComponent implements OnInit {
   statementdate = new FormControl('', Validators.required);
   duedate = new FormControl('', Validators.required);
   createdate = new FormControl('', Validators.required);
-
+  options: Object;
   constructor(private cardService: CardService,
     private formBuilder: FormBuilder,
     public toast: ToastComponent) {
-
-
+    
   }
 
   ngOnInit() {
@@ -45,7 +44,43 @@ export class CardComponent implements OnInit {
 
   getCards() {
     this.cardService.getCards().subscribe(
-      data => this.cards = data,
+      data => {
+        this.cards = data
+        this.options = {
+          chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+          },
+          title: {
+            text: 'Credit card limit chart'
+          },
+          tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+            pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+              }
+            }
+          },
+          series: [{
+            name: 'Brands',
+            data: [
+              
+            ]
+          }]
+        }
+        this.cards.forEach(item => {
+          console.log(this.options)
+          this.options && this.options.series[0].data.push({ name: item.bank, y: item.limit });
+        })
+      },
       error => console.log(error),
       () => this.isLoading = false
     );
