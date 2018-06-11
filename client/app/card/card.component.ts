@@ -77,7 +77,6 @@ export class CardComponent implements OnInit {
           }]
         }
         this.cards.forEach(item => {
-          console.log(this.options)
           this.options && this.options.series[0].data.push({ name: item.bank, y: item.limit });
         })
       },
@@ -111,6 +110,10 @@ export class CardComponent implements OnInit {
   }
 
   editCard(card: Card) {
+    let createDate = new Date(card.createdate);
+    let month = createDate.getMonth() + 1;
+
+    card.createdate = createDate.getFullYear() + '-' + (month > 10 ? month : '0' + month) + '-' + createDate.getDate()
     this.cardService.editCard(card).subscribe(
       () => {
         this.isEditing = false;

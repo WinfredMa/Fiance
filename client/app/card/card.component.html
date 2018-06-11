@@ -50,7 +50,7 @@
               <input class="form-control mr-2" type="text" name="statementdate" [(ngModel)]="card.statementdate" placeholder="Statement Date" required>
               <input class="form-control mr-2" type="text" name="duedate" [(ngModel)]="card.duedate" placeholder="Due Date" required>
               <input class="form-control mr-2" type="text" name="remark" [(ngModel)]="card.remark" placeholder="Remark">
-              <input class="form-control mr-2" name="date" [(ngModel)]="card.createdate" placeholder="Create Date" ngui-datetime-picker date-only="true" />
+              <input class="form-control mr-2" type="text" name="createdate" [(ngModel)]="card.createdate" placeholder="Create Date" ngui-datetime-picker date-only="true" />
               <button class="btn btn-sm btn-primary mr-2" type="submit" [disabled]="!form.form.valid">
                 <i class="fa fa-floppy-o"></i> Save</button>
               <button class="btn btn-sm btn-warning" (click)="cancelEditing()">
