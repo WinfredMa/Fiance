@@ -22,11 +22,12 @@ export class CardComponent implements OnInit {
   statementdate = new FormControl('', Validators.required);
   duedate = new FormControl('', Validators.required);
   createdate = new FormControl('', Validators.required);
-  options: Object;
+  options;
+  usageRate;
   constructor(private cardService: CardService,
     private formBuilder: FormBuilder,
     public toast: ToastComponent) {
-    
+
   }
 
   ngOnInit() {
@@ -72,13 +73,52 @@ export class CardComponent implements OnInit {
           series: [{
             name: 'Brands',
             data: [
-              
+
             ]
           }]
         }
         this.cards.forEach(item => {
           this.options && this.options.series[0].data.push({ name: item.bank, y: item.limit });
         })
+        this.usageRate = {
+          chart: {
+            inverted: true,
+            type: 'bullet',
+            height: 200
+          },
+
+          xAxis: {
+            categories: ['<span class="hc-cat-title">Profit</span><br/>%']
+          },
+          yAxis: {
+            plotBands: [{
+              from: 0,
+              to: 20,
+              color: '#666'
+            }, {
+              from: 20,
+              to: 25,
+              color: '#999'
+            }, {
+              from: 25,
+              to: 100,
+              color: '#bbb'
+            }],
+            labels: {
+              format: '{value}%'
+            },
+            title: null
+          },
+          series: [{
+            data: [{
+              y: 22,
+              target: 100
+            }]
+          }],
+          tooltip: {
+            pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+          }
+        }
       },
       error => console.log(error),
       () => this.isLoading = false

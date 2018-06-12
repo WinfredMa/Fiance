@@ -24,6 +24,15 @@ import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 import { ChartModule } from "angular2-highcharts";
+import * as highcharts from 'highcharts';
+
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const dd = require('highcharts/modules/bullet');
+  dd(hc);
+
+  return hc;
+}
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,7 +56,7 @@ export function tokenGetter() {
     RoutingModule,
     SharedModule,
     NguiDatetimePickerModule,
-    ChartModule.forRoot(require('highcharts')),
+    ChartModule.forRoot(highchartsFactory()),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -62,7 +71,7 @@ export function tokenGetter() {
     CatService,
     ConsumptionService,
     CardService,
-    UserService
+    UserService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

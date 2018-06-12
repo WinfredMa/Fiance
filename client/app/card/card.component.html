@@ -47,10 +47,12 @@
               <input class="form-control mr-2" type="text" name="bank" [(ngModel)]="card.bank" placeholder="Bank" required>
               <input class="form-control mr-2" type="text" name="type" [(ngModel)]="card.type" placeholder="Type" required>
               <input class="form-control mr-2" type="number" name="limit" [(ngModel)]="card.limit" placeholder="Limit" min="0" required>
-              <input class="form-control mr-2" type="text" name="statementdate" [(ngModel)]="card.statementdate" placeholder="Statement Date" required>
+              <input class="form-control mr-2" type="text" name="statementdate" [(ngModel)]="card.statementdate" placeholder="Statement Date"
+                required>
               <input class="form-control mr-2" type="text" name="duedate" [(ngModel)]="card.duedate" placeholder="Due Date" required>
               <input class="form-control mr-2" type="text" name="remark" [(ngModel)]="card.remark" placeholder="Remark">
-              <input class="form-control mr-2" type="text" name="createdate" [(ngModel)]="card.createdate" placeholder="Create Date" ngui-datetime-picker date-only="true" />
+              <input class="form-control mr-2" type="text" name="createdate" [(ngModel)]="card.createdate" placeholder="Create Date" ngui-datetime-picker
+                date-only="true" />
               <button class="btn btn-sm btn-primary mr-2" type="submit" [disabled]="!form.form.valid">
                 <i class="fa fa-floppy-o"></i> Save</button>
               <button class="btn btn-sm btn-warning" (click)="cancelEditing()">
@@ -63,6 +65,7 @@
   </div>
 </div>
 <chart [options]="options"></chart>
+<chart [options]="usageRate"></chart>
 <div class="card" *ngIf="!isEditing">
   <h4 class="card-header">Add new card</h4>
   <div class="card-body">
@@ -81,7 +84,8 @@
       </div>
       <div>
         <label>Statement Date</label>
-        <input class="form-control mr-2" type="text" name="statementdate" formControlName="statementdate" placeholder="Statement Date" />
+        <input class="form-control mr-2" type="text" name="statementdate" formControlName="statementdate" placeholder="Statement Date"
+        />
       </div>
       <div>
         <label>Due Date</label>
@@ -93,7 +97,8 @@
       </div>
       <div>
         <label>Create Date</label>
-        <input class="form-control mr-2" name="createdate" formControlName="createdate" placeholder="Create Date" ngui-datetime-picker date-only="true" />
+        <input class="form-control mr-2" name="createdate" formControlName="createdate" placeholder="Create Date" ngui-datetime-picker
+          date-only="true" />
       </div>
       <div>
         <button class="btn btn-primary" type="submit" [disabled]="!addCardForm.valid">
